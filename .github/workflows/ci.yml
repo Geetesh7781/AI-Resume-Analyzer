@@ -9,21 +9,25 @@ on:
 jobs:
   backend:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: backend
     steps:
       - uses: actions/checkout@v4
+      - name: Verify backend folder exists
+        run: |
+          test -f backend/requirements.txt || (echo "::error::backend/requirements.txt missing — backend may be a broken git submodule. Run scripts/fix-backend-on-github.ps1" && exit 1)
+          test -d backend/app || (echo "::error::backend/app missing" && exit 1)
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
           cache: pip
           cache-dependency-path: backend/requirements.txt
       - name: Install dependencies
+        working-directory: backend
         run: pip install -r requirements.txt
       - name: Lint (syntax check)
+        working-directory: backend
         run: python -m compileall app
       - name: Import check
+        working-directory: backend
         env:
           GEMINI_API_KEY: test-key
           SECRET_KEY: ci-secret-key-for-testing-only
