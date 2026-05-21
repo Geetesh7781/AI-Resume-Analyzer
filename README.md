@@ -20,6 +20,36 @@ A production-ready full-stack AI Resume Analyzer that uses **FastAPI**, **React*
 - **Dark Mode** – Responsive Tailwind UI
 
 ## Architecture
+```mermaid
+flowchart TD
+
+    A[Resume PDF<br/>User uploaded document]
+
+    B[PyMuPDF<br/>Extract text from PDF]
+
+    C[Chunking<br/>RecursiveCharacterTextSplitter]
+
+    D[Gemini Embeddings API<br/>models/embedding-001]
+
+    E[Supabase pgvector<br/>Store & retrieve embeddings]
+
+    F[Gemini LLM<br/>gemini-2.0-flash]
+
+    G[ATS Score<br/>Match Percentage]
+
+    H[AI Chat Feedback]
+
+    A --> B
+    B --> C
+    C --> D
+    D --> E
+    E --> F
+
+    E -. RAG Retrieval .-> D
+
+    F --> G
+    F --> H
+```
 
 ```
 Resume PDF → PyMuPDF → Chunking → Gemini Embeddings API → Supabase pgvector
@@ -137,7 +167,6 @@ VITE_API_URL=http://localhost:8000/api
 |------|-----------|--------------|
 | ![Home](docs/screenshots/home.png) | ![Dashboard](docs/screenshots/dashboard.png) | ![ATS](docs/screenshots/ats-analysis.png) |
 
-_Add screenshots to `docs/screenshots/` and they will appear here._
 
 ## Project Structure
 
