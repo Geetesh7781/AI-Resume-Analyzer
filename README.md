@@ -51,10 +51,6 @@ flowchart TD
     F --> H
 ```
 
-```
-Resume PDF → PyMuPDF → Chunking → Gemini Embeddings API → Supabase pgvector
-    → RAG Retrieval → Gemini → ATS / Chat / Suggestions
-```
 
 See [docs/architecture.md](docs/architecture.md) for the full diagram.
 
