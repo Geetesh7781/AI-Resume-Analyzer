@@ -22,7 +22,7 @@ A production-ready full-stack AI Resume Analyzer that uses **FastAPI**, **React*
 ## Architecture
 
 ```
-Resume PDF → PyMuPDF → Chunking → Sentence Transformers → FAISS
+Resume PDF → PyMuPDF → Chunking → Gemini Embeddings API → Supabase pgvector
     → RAG Retrieval → Gemini → ATS / Chat / Suggestions
 ```
 
@@ -32,7 +32,7 @@ See [docs/architecture.md](docs/architecture.md) for the full diagram.
 
 | Layer | Technologies |
 |-------|-------------|
-| Backend | Python, FastAPI, LangChain, FAISS, Gemini, PyMuPDF, spaCy, Sentence Transformers |
+| Backend | Python, FastAPI, LangChain, Supabase pgvector, Gemini API, PyMuPDF |
 | Frontend | React, Tailwind CSS, Axios, React Router, Chart.js |
 | DevOps | Docker, GitHub Actions, Vercel, Render/Railway |
 
@@ -129,7 +129,7 @@ VITE_API_URL=http://localhost:8000/api
 1. Deploy `backend/` with start command:
    `uvicorn app.main:app --host 0.0.0.0 --port $PORT`
 2. Add env vars from `.env.example`.
-3. Mount persistent disk for `uploads/` and `vectorstore/` if needed.
+3. Configure Supabase (`docs/supabase_setup.sql`) and set `SUPABASE_URL` + `SUPABASE_SERVICE_ROLE_KEY`.
 
 ## Screenshots
 

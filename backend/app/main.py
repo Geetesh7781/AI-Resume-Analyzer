@@ -74,4 +74,6 @@ async def health():
         "status": "healthy",
         "gemini_configured": bool(settings.gemini_api_key),
         "gemini_model": gemini_model,
+        "supabase_configured": settings.supabase_configured,
+        "embeddings": "gemini-api",
     }

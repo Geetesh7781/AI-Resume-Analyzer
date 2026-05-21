@@ -24,12 +24,12 @@ async def chat_query(
     if not resume:
         raise HTTPException(status_code=404, detail="Resume not found")
 
-    index_paths = [resume.vector_index_path] if resume.vector_index_path else []
+    collection_keys = [resume.vector_index_path] if resume.vector_index_path else []
     jd = None
     if data.jd_id:
         jd = await jd_service.get_user_jd(db, current_user.id, data.jd_id)
         if jd and jd.vector_index_path:
-            index_paths.append(jd.vector_index_path)
+            collection_keys.append(jd.vector_index_path)
 
     if data.session_id:
         from sqlalchemy import select
@@ -59,7 +59,7 @@ async def chat_query(
         answer, sources = await asyncio.to_thread(
             rag_chain_service.chat,
             data.question,
-            index_paths,
+            collection_keys,
             session_id,
             resume.raw_text or "",
             jd_text,

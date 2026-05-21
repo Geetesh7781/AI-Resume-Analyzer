@@ -63,7 +63,7 @@ class ResumeParserService:
             return candidate
         return "Unknown"
 
-    def parse_with_nlp(self, text: str) -> dict[str, Any]:
+    def parse_with_text_splitter(self, text: str) -> dict[str, Any]:
         sections = self._extract_sections(text)
         skills = self._extract_skills_regex(text)
         return {
@@ -106,7 +106,7 @@ Resume:
         return basic
 
     def parse_resume(self, text: str, use_gemini: bool = True) -> dict[str, Any]:
-        parsed = self.parse_with_nlp(text)
+        parsed = self.parse_with_text_splitter(text)
         if use_gemini:
             parsed = self.enhance_with_gemini(text, parsed)
         return parsed
