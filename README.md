@@ -13,7 +13,7 @@ A production-ready full-stack AI Resume Analyzer that uses **FastAPI**, **React*
 - **Resume Upload** – PDF parsing with PyMuPDF + NLP/Gemini enrichment
 - **Job Description** – Paste text or upload JD PDF
 - **ATS Score Engine** – Skills, keywords, experience, education, formatting, projects
-- **Resume vs JD Matching** – Match %, missing tech, improvements
+- **Resume vs JD Matching** – Match %, missing tech, improvementspython -m pip install --upgrade pip
 - **RAG AI Chatbot** – FAISS retrieval + Gemini with conversation memory
 - **Interview Questions** – HR, technical, resume & project-based
 - **Dashboard** – Charts, skills, suggestions, ATS history
